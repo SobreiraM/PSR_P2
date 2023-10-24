@@ -3,7 +3,7 @@ import argparse
 import numpy
 from functools import partial
 import json
-import pprint
+
 
 
 
@@ -19,17 +19,6 @@ def onTrackbar(min_B, max_B, min_G, max_G, min_R, max_R, image_hsv):
 
     mask = cv2.inRange(image_hsv, (min_B,min_G,min_R), (max_B,max_G,max_R))
     cv2.imshow('window', mask)
-
-
-
-"""
-    print(str(min_B), end=' ')
-    print(str(max_B), end=' ')
-    print(str(min_G), end=' ')
-    print(str(max_G), end=' ')
-    print(str(min_R), end=' ')
-    print(str(max_R))
-"""
 
 def main():
 
@@ -68,7 +57,7 @@ def main():
         onTrackbar(0, 0, 0, 0, 0, 0, image)
         
         key = cv2.waitKey(25)
-        if key == ord(' '):
+        if key == ord('q'):
             break
         elif key == ord('w'):
             limits = {'min_B': cv2.getTrackbarPos('min B/H', 'window'),
@@ -77,8 +66,8 @@ def main():
                     'max_G': cv2.getTrackbarPos('max G/S', 'window'),
                     'min_R': cv2.getTrackbarPos('min R/V', 'window'),
                     'max_R': cv2.getTrackbarPos('max R/V', 'window')}
-            
-            limits_F = open('limits_F.txt', 'a')          # Open the file limits_F.txt 
+
+            limits_F = open('limits_F.json', 'a')          # Open the file limits_F.json
             limits_F.truncate(0)                          # Clears file from previous runs
             json.dump(limits, limits_F)                   # Saves values from limits
             limits_F.write('\n')
