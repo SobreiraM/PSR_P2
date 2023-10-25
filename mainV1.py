@@ -216,7 +216,7 @@ def main():
     cv2.moveWindow('White Board', int(scr_w/32 + imgSizeW + (scr_w * 0.05)), int((scr_h/32) + (imgSizeH) + scr_h*0.02))
     cv2.resizeWindow('White Board', imgSizeW, imgSizeH)
     
-    cv2.moveWindow('Mask', int(scr_w/32), int((scr_h/32) + (imgSizeH) + scr_h*0.02))
+    cv2.moveWindow('Mask', int(scr_w/32), int((scr_h/32) + (imgSizeH) + 40))
     cv2.resizeWindow('Mask', imgSizeW, imgSizeH)
 
     # Configure and show the Color Picker window
