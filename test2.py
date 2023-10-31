@@ -173,30 +173,26 @@ def Draw_On_Camera(frame,drawing):
 
    
 def Circles(shapes_data):
-    #temp_image = shapes_data['image']
     radius = int(np.sqrt((shapes_data['start_x'] - shapes_data['current_x'])**2 +
                           (shapes_data['start_y'] - shapes_data['current_y'])**2))
-    #cv2.circle(temp_image, (shapes_data['start_x'], shapes_data['start_y']), radius, (0, 255, 0), 3)
-    #cv2.imshow('White Board', temp_image)
-
+    
     key = cv2.waitKey(1)
     if key == ord('a'):
         shapes_data['circle'] = False
         cv2.circle(shapes_data['image'], (shapes_data['start_x'], shapes_data['start_y']), radius,
                     shapes_data['color'], 3)
+    elif key == 27:                         # Press 'Esc' to cancel
+        shapes_data['rectangle'] = False
 
 def Rectangles(shapes_data):
-    #temp_image = shapes_data['image']
-    #cv2.rectangle(temp_image, (shapes_data['start_x'], shapes_data['start_y']),
-    #               (shapes_data['current_x'],shapes_data['current_y']), (0, 255, 0), 3)
-    #cv2.imshow('White Board', temp_image)
-
     key = cv2.waitKey(1)
     if key == ord('a'):
         shapes_data['rectangle'] = False
         cv2.rectangle(shapes_data['image'], (shapes_data['start_x'], shapes_data['start_y']),
                    (shapes_data['current_x'],shapes_data['current_y']), shapes_data['color'], 3)
-    #elif key == ord('')
+    elif key == 27:                         # Press 'Esc' to cancel
+        shapes_data['rectangle'] = False
+
     
 
 
@@ -238,7 +234,6 @@ def main():
     drawing_data = {'new_x': 0, 'new_y': 0,'previous_x': 0, 'previous_y': 0,'selected_color': (0,0,0),
                     'color': (0,0,255), 'thickness': 2}
     
-    ################################      NEW           #############################
     shapes_data = {'start_x': 0, 'start_y': 0, 'current_x': 0, 'current_y': 0, 'rectangle': False, 'circle': False,
                 'image': blank_image, 'color': (0,0,0), 'thickness' : 2}
 
@@ -280,7 +275,7 @@ def main():
     cv2.createTrackbar(trackbarInfo['trackbar_name'], color_name, 0, trackbarInfo['sliderMax'],
         partial(onColorTrackbar, img = rgb_image, window_name=color_name, drawing_data=drawing_data, shapes_data=shapes_data))
     cv2.setTrackbarPos(trackbarInfo['trackbar_name'], color_name, trackbarInfo['val'])
-    onColorTrackbar(trackbarInfo['val'], rgb_image, color_name, drawing_data, shapes_data=shapes_data)
+    onColorTrackbar(trackbarInfo['val'], rgb_image, color_name, drawing_data, shapes_data)
 
     # Set mouse callback
     cv2.setMouseCallback(color_name, partial(chooseColor, img=rgb_image, drawing_data=drawing_data, trackbarInfo=trackbarInfo,
@@ -299,11 +294,11 @@ def main():
         drawing_data['new_y'] = centroid_y 
 
 
-        ##          NEW
+     
         if shapes_data['circle'] == True:               # Condition to keep the shape being drawn if
             shapes_data['current_x'] = centroid_x       # the user has pressed 'o' for circles or 
             shapes_data['current_y'] = centroid_y       # 's' for rectangles and if this process hasn't
-            Circles(shapes_data)           # ended yet
+            Circles(shapes_data)                        # ended yet
 
         elif shapes_data['rectangle'] == True:
             shapes_data['current_x'] = centroid_x
@@ -312,22 +307,20 @@ def main():
             
         else:                                           # If none of the previous conditions are true,
             Drawing(drawing_data, blank_image)          # the program shoud follow its natural procedure to draw lines
-
-            cv2.imshow('White Board', blank_image)      #while shape mode is on we want to show a different image than this one
             
             shapes_data['start_x'] = centroid_x         # This will refresh the coordinates of where to start drawing the shapes
             shapes_data['start_y'] = centroid_y         # if the user enters the drawing shapes mode
 
-        ### END NEW
-
+  
 
         blended_frame = Draw_On_Camera(frame, blank_image)
-        cv2.imshow('Blended Frame', blended_frame)
-        
+           
     
         # Display the processed frame
         cv2.imshow('Processed Frame', processed_frame)
         cv2.imshow('Mask', mask)
+         cv2.imshow('Blended Frame', blended_frame)
+        cv2.imshow('White Board', blank_image)  
         
         
         
@@ -382,22 +375,14 @@ def main():
             print('Saving image as' + Fore.GREEN + ' result.png' + Style.RESET_ALL + ' ...')
             cv2.imwrite('result.png', blank_image)
         
-        ##              NEW
         elif key == ord('s')  and not shapes_data['rectangle']:
             print('Starting to draw the shape of a rectangle')
             shapes_data['rectangle'] = True
-            #shapes_data['start_x'] = centroid_x
-            #shapes_data['start_y'] = centroid_y
-            #Rectangles(blank_image, shapes_data)
-
+        
         elif key == ord('o') and not shapes_data['circle']:
             print('Starting to draw the shape of a circle')
             shapes_data['circle'] = True
-            #shapes_data['start_x'] = centroid_x
-            #shapes_data['start_y'] = centroid_y
-            #Circles(blank_image, shapes_data)
-        ##          END NEW    
-
+         
 
 
     capture.release()
