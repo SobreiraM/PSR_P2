@@ -53,8 +53,8 @@ def onTrackbar(min_B, max_B, min_G, max_G, min_R, max_R, image_hsv):
 def main():
 
         # initial setup
-    capture = cv2.VideoCapture()
-    capture.open('http://192.168.1.23:8000/')
+    capture = cv2.VideoCapture(0)
+    #capture.open('http://192.168.1.23:8000/')
     window_name = 'window'
     cam_name = 'cam'
     cv2.namedWindow(window_name,cv2.WINDOW_AUTOSIZE)
@@ -111,3 +111,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
