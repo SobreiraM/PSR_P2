@@ -4,6 +4,7 @@
 # PSR - AR PAINT
 #
 # Miguel Sobreira, 110045
+# Miguel Simões, 118200
 # Gonçalo Rodrigues, 98322
 ########################################################
 
