@@ -12,4 +12,4 @@ Miguel Simões
 A versão final deste projeto encontra-se na pasta "Versão_Final".
 Os restantes ficheiros correspondem a trabalho que foi realizado em ordem a obter a versão final e versões antigas.
 
-Para efeitos de avaliação deve considerar-se a pasta 'Versao_Final' e o ficheiro main.py.
+Para efeitos de avaliação deve considerar-se a pasta 'Versao_Final' e 'images'
