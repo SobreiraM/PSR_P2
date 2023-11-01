@@ -4,7 +4,7 @@
 # PSR - AR PAINT
 #
 # Miguel Sobreira, 110045
-#
+# Gonçalo Rodrigues, 98322
 ########################################################
 
 import argparse
@@ -362,7 +362,7 @@ def main():
     color_name = 'Color Picker'
     last_centroid = [0,0]
     drawing_data = {'new_x': 0, 'new_y': 0,'previous_x': 0, 'previous_y': 0,'selected_color': (0,0,0),
-                    'color': (0,0,255), 'thickness': 2}
+                    'color': (0,0,255), 'thickness': 2, 'pencil_down': False}
     
     shapes_data = {'start_x': 0, 'start_y': 0, 'current_x': 0, 'current_y': 0, 'rectangle': False, 'circle': False,
                 'color': (0,0,0), 'thickness' : 2}
