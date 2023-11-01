@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+
+########################################################
+# PSR - Color Segmenter
+#
+# Miguel Sobreira, 110045
+# Miguel Simões, 118200
+# Gonçalo Rodrigues, 98322
+########################################################
+
 import cv2
 import argparse
 import numpy
