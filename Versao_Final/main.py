@@ -588,7 +588,6 @@ def main():
             elif key == ord('4'):
                 drawing_data['color'] = (180, 180, 180) 
             elif key == ord('c'):
-                print('Here')
                 paint_image = paint_image_Backup.copy()
             elif key == ord('v'):
                 print('Verifying if all numbered coutours were filled with the correct color...')
